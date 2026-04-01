@@ -412,12 +412,16 @@ def main():
             continue
 
         # Signal scan only during market hours
-        if is_market_hours(now):
-            run_signal_scan(tickers, cfg)
-            sleep_secs = wait_for_next_candle_close(cfg["interval"])
-        else:
-            log.info(f"Market closed ({now.strftime('%H:%M ET')}). Sleeping 5 minutes.")
-            sleep_secs = 300
+        #if is_market_hours(now):
+         
+            #run_signal_scan(tickers, cfg)
+            #sleep_secs = wait_for_next_candle_close(cfg["interval"])
+        #else:
+         #   log.info(f"Market closed ({now.strftime('%H:%M ET')}). Sleeping 5 minutes.")
+          #  sleep_secs = 300
+        # Run 24/7 - scan on every candle close
+        run_signal_scan(tickers, cfg)
+        sleep_secs = wait_for_next_candle_close(cfg["interval"])
 
         time.sleep(sleep_secs)
 
