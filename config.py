@@ -32,11 +32,11 @@ CONFIG = {
 
     # ── Bollinger Bands ───────────────────────────────────────────────────────
     "bb_period": 20,
-    "bb_std":    0.01,   # standard deviation multiplier
+    "bb_std":    2.0,   # standard deviation multiplier
 
     # ── RSI ───────────────────────────────────────────────────────────────────
     "rsi_period":    14,
-    "rsi_threshold": 1,   # signal fires when RSI > this (long) or < 100-this (short)
+    "rsi_threshold": 75,   # signal fires when RSI > this (long) or < 100-this (short)
 
     # ── Zero Lag MACD (port of Pine Script Enhanced v1.2 by Albert Callisto) ──
     "macd": {
