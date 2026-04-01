@@ -32,11 +32,11 @@ CONFIG = {
 
     # ── Bollinger Bands ───────────────────────────────────────────────────────
     "bb_period": 20,
-    "bb_std":    2.0,   # standard deviation multiplier
+    "bb_std":    0.01,   # standard deviation multiplier
 
     # ── RSI ───────────────────────────────────────────────────────────────────
     "rsi_period":    14,
-    "rsi_threshold": 55,   # signal fires when RSI > this (long) or < 100-this (short)
+    "rsi_threshold": 1,   # signal fires when RSI > this (long) or < 100-this (short)
 
     # ── Zero Lag MACD (port of Pine Script Enhanced v1.2 by Albert Callisto) ──
     "macd": {
@@ -56,5 +56,5 @@ CONFIG = {
     # When True, a LONG signal also requires the daily trend to be bullish (price > 50-day SMA).
     # A SHORT signal requires the daily trend to be bearish.
     # Set False to fire signals regardless of higher timeframe.
-    "require_htf_confirmation": True,
+    "require_htf_confirmation": False,
 }
