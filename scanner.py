@@ -267,6 +267,14 @@ def wait_for_next_candle_close(interval: str) -> int:
     log.info(f"Next {interval} candle close at {next_close.strftime('%H:%M:%S ET')} — sleeping {sleep_secs:.0f}s")
     return int(sleep_secs)
 
+def is_market_hours(now: datetime) -> bool:
+    """True if within regular US market hours Mon–Fri 9:30–16:00 ET."""
+    if now.weekday() >= 5:
+        return False
+    open_time  = now.replace(hour=9,  minute=30, second=0, microsecond=0)
+    close_time = now.replace(hour=16, minute=0,  second=0, microsecond=0)
+    return open_time <= now <= close_time
+
 def is_premarket(now: datetime) -> bool:
     if now.weekday() >= 5:
         return False
@@ -307,10 +315,21 @@ def main():
             time.sleep(60)
             continue
 
-        # Signal scan — runs 24/7
-        run_signal_scan(tickers, cfg)
-        sleep_secs = wait_for_next_candle_close(cfg["interval"])
+        # Signal scan only during market hours
+        if is_market_hours(now):
+            run_signal_scan(tickers, cfg)
+            sleep_secs = wait_for_next_candle_close(cfg["interval"])
+        else:
+            log.info(f"Market closed ({now.strftime('%H:%M ET')}). Sleeping 5 minutes.")
+            sleep_secs = 300
+
         time.sleep(sleep_secs)
+
+        # Signal scan — runs 24/7
+        #run_signal_scan(tickers, cfg)
+        
+        #sleep_secs = wait_for_next_candle_close(cfg["interval"])
+        #time.sleep(sleep_secs)
 
 if __name__ == "__main__":
     main()
