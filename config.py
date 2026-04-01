@@ -36,7 +36,7 @@ CONFIG = {
 
     # ── RSI ───────────────────────────────────────────────────────────────────
     "rsi_period":    14,
-    "rsi_threshold": 75,   # signal fires when RSI > this (long) or < 100-this (short)
+    "rsi_threshold": 55,   # signal fires when RSI > this (long) or < 100-this (short)
 
     # ── Zero Lag MACD (port of Pine Script Enhanced v1.2 by Albert Callisto) ──
     "macd": {
